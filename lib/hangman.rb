@@ -3,12 +3,13 @@ puts "Hangman Hangman Hangmaaaanneee"
 
 
 class Hangman
-    attr_accessor :random_word, :number_of_guesses
+    attr_accessor :random_word, :number_of_guesses, :display
     @@player_input = []
 
     def initialize
         @random_word = random_word
         @number_of_guesses = number_of_guesses
+        @display = display
     end
 
     def load_and_select_word_randomly
@@ -26,8 +27,8 @@ class Hangman
     end
 
     def mask_random_word
-        display = @random_word.chars.map { |_| "_"}.join(" ")
-        puts display
+        @display = @random_word.chars.map { |_| "_"}.join(" ")
+        puts @isplay
     end
 
     def assign_guess_limit
@@ -45,10 +46,24 @@ class Hangman
         @@player_input.push(input)
     end
 
+    def validate_player_selection
+        until number_of_guesses == 0
+            player_selection
+            if @random_word.include?(@@player_input)
+                update_display
+            else
+                puts "Letter mismatch, keep this up and you will be hanged"
+            end
+            @number_of_guesses -= 1
+        end
+    end
+
 end
 
 hangman = Hangman.new
 hangman.load_and_select_word_randomly
+hangman.assign_guess_limit
 hangman.mask_random_word
 hangman.player_selection
+hangman.validate_player_selection-
 
