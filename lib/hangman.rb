@@ -4,6 +4,7 @@ puts "Hangman Hangman Hangmaaaanneee"
 
 class Hangman
     attr_accessor :random_word, :number_of_guesses
+    @@player_input = []
 
     def initialize
         @random_word = random_word
@@ -36,14 +37,13 @@ class Hangman
     def player_selection
         puts "Input a letter"
 
-        player_input = gets.chomp.downcase
-        until player_input.length == 1 && player_input.match?(/[a-z]/)
+        input = gets.chomp.downcase
+        until input.length == 1 && input.match?(/[a-z]/)
             puts "Invalid input. Please type a single letter"
-            player_input = gets.chomp.downcase
+            input = gets.chomp.downcase
         end
-        player_input
+        @@player_input.push(input)
     end
-
 
 end
 
