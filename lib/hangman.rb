@@ -32,10 +32,23 @@ class Hangman
     def assign_guess_limit
         @number_of_guesses = @random_word.length
     end
+
+    def player_selection
+        puts "Input a letter"
+
+        player_input = gets.chomp.downcase
+        until player_input.length == 1 && player_input.match?(/[a-z]/)
+            puts "Invalid input. Please type a single letter"
+            player_input = gets.chomp.downcase
+        end
+        player_input
+    end
+
+
 end
 
 hangman = Hangman.new
 hangman.load_and_select_word_randomly
 hangman.mask_random_word
-hangman.assign_guess_limit
+hangman.player_selection
 
