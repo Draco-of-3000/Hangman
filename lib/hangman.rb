@@ -28,9 +28,14 @@ class Hangman
         display = @random_word.chars.map { |_| "_"}.join(" ")
         puts display
     end
+
+    def assign_guess_limit
+        @number_of_guesses = @random_word.length
+    end
 end
 
 hangman = Hangman.new
 hangman.load_and_select_word_randomly
 hangman.mask_random_word
+hangman.assign_guess_limit
 
