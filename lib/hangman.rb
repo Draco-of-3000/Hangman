@@ -58,7 +58,7 @@ class Hangman
         end
     end
 
-    def update_display
+    def unmask_word
         updated_display = @random_word.chars.map do |letter|
             if @@player_input.include?(letter)
                 letter
