@@ -3,13 +3,15 @@ puts "Hangman Hangman Hangmaaaanneee"
 
 
 class Hangman
-    attr_accessor :random_word, :number_of_guesses, :display
+    attr_accessor :random_word, :number_of_guesses, :display, :updated_display
     @@player_input = []
 
     def initialize
         @random_word = random_word
         @number_of_guesses = number_of_guesses
         @display = []
+        @updated_display = updated_display
+        @game_over = false 
     end
 
     def load_and_select_word_randomly
@@ -46,7 +48,7 @@ class Hangman
     end
 
     def validate_player_selection
-        @number_of_guesses.times do
+        until @number_of_guesses == 0 || @updated_display == @random_word
             puts "Input a letter"
             player_selection
             if @random_word.include?(@@player_input.last)
@@ -59,7 +61,7 @@ class Hangman
     end
 
     def unmask_word
-        updated_display = @random_word.chars.map do |letter|
+        @updated_display = @random_word.chars.map do |letter|
             if @@player_input.include?(letter)
                 letter
             else
@@ -69,6 +71,13 @@ class Hangman
 
         @display = updated_display.join(" ")
         puts @display
+
+        declare_victory if updated_display.join == @random_word 
+    end
+
+    def declare_victory
+        puts "Congratulations, you guessed the word right and outwitted the executioner!"
+        @game_over = true
     end
 
 end
