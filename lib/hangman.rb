@@ -16,6 +16,19 @@ class Hangman
         @wrong_guesses = []
         @wrong_guess_count = 0
 
+        puts "Welcome To Hangman!"
+
+        if File.exist?('hangman_save.txt')
+            load_game_option = prompt_load_game_option
+
+            if load_game_option == 'yes'
+                load_game
+            else
+                start_new_game
+            end
+        else
+            start_new_game
+        end
     end
 
     def load_and_select_word_randomly
