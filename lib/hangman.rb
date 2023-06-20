@@ -9,7 +9,7 @@ class Hangman
     def initialize
         @random_word = random_word
         @number_of_guesses = number_of_guesses
-        @display = []
+        @display = display
         @updated_display = updated_display
         @game_over = false 
     end
@@ -29,8 +29,7 @@ class Hangman
     end
 
     def mask_random_word
-        masked_word = @random_word.chars.map { |_| "_"}.join(" ")
-        @display.push(masked_word)
+        @display = @random_word.chars.map { |_| "_"}.join(" ")
         puts @display
     end
 
@@ -39,6 +38,7 @@ class Hangman
     end
 
     def player_selection
+        puts "Input a letter"
         input = gets.chomp.downcase
         until input.length == 1 && input.match?(/[a-z]/)
             puts "Invalid input. Please type a single letter"
@@ -48,8 +48,7 @@ class Hangman
     end
 
     def validate_player_selection
-        until @number_of_guesses == 0 || @updated_display == @random_word
-            puts "Input a letter"
+        until @number_of_guesses == 0 || @game_over
             player_selection
             if @random_word.include?(@@player_input.last)
                 unmask_word
@@ -86,5 +85,4 @@ hangman = Hangman.new
 hangman.load_and_select_word_randomly
 hangman.assign_guess_limit
 hangman.mask_random_word
-hangman.player_selection
 hangman.validate_player_selection
