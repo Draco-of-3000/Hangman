@@ -49,17 +49,22 @@ class Hangman
     end
 
     def validate_player_selection
+        num_guesses = 14
         until @number_of_guesses == 0 || @game_over
             player_selection
             if @random_word.include?(@@player_input.last)
                 unmask_word
             else
                 puts "Letter mismatch, keep this up and you will be hanged"
-                @wrong_guesses.push(@@player_input.last)
-                puts "Wrongly guessed letters: #{@wrong_guesses}"
+                display_wrong_guesses
             end
             @number_of_guesses -= 1
         end
+    end
+
+    def display_wrong_guesses
+        @wrong_guesses.push(@@player_input.last)
+        puts "Wrongly guessed letters: #{@wrong_guesses}"
     end
 
     def unmask_word
@@ -82,6 +87,52 @@ class Hangman
         @game_over = true
     end
 
+    def draw_hangman(num_guesses)
+        case num_guesses
+        when 14, 12
+          puts "   ________"
+          puts "   |      |"
+          puts "   |"
+          puts "   |"
+          puts "   |"
+          puts "   |"
+          puts "___|___"
+        when 10, 8
+          puts "   ________"
+          puts "   |      |"
+          puts "   |      O"
+          puts "   |"
+          puts "   |"
+          puts "   |"
+          puts "___|___"
+        when 6, 4
+          puts "   ________"
+          puts "   |      |"
+          puts "   |      O"
+          puts "   |     /|\\"
+          puts "   |"
+          puts "   |"
+          puts "___|___"
+        when 2
+          puts "   ________"
+          puts "   |      |"
+          puts "   |      O"
+          puts "   |     /|\\"
+          puts "   |      |"
+          puts "   |"
+          puts "___|___"
+        when 0
+          puts "   ________"
+          puts "   |      |"
+          puts "   |      O"
+          puts "   |     /|\\"
+          puts "   |      |"
+          puts "   |     / \\"
+          puts "___|___"
+          puts "You lost! The hangman is fully drawn."
+        end
+    end
+      
 end
 
 hangman = Hangman.new
