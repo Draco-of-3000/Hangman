@@ -5,7 +5,7 @@ puts "Hangman Hangman Hangmaaaanneee"
 
 
 class Hangman
-    attr_accessor :random_word, :number_of_guesses, :display, :updated_display, :wrong_guesses, :wrong_guess_count
+    attr_accessor :random_word, :display, :updated_display, :wrong_guesses, :wrong_guess_count
     @@player_input = []
 
     def initialize
@@ -157,7 +157,6 @@ class Hangman
     def save_game
         save_data = {
             random_word: @random_word,
-            number_of_guesses: @number_of_guesses,
             display: @display,
             updated_display: @updated_display,
             wrong_guesses: @wrong_guesses,
