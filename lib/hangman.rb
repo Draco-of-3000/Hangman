@@ -34,10 +34,6 @@ class Hangman
         puts @display
     end
 
-    def assign_guess_limit
-        @number_of_guesses = @random_word.length * 2
-    end
-
     def player_selection
         puts "Input a letter"
         input = gets.chomp.downcase
