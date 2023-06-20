@@ -205,15 +205,25 @@ class Hangman
         @wrong_guess_count = saved_data[:wrong_guess_count]
 
         puts "Game loaded successfully"
+
+        start_new_game
     rescue Errno::ENOENT
         puts "No saved game found"
     end
 
-    def start_new_game
+    def continue_game
         if @random_word.nil?
           load_and_select_word_randomly
           mask_random_word
         end
+        unmask_word
+        display_wrong_guesses
+        validate_player_selection
+    end 
+    
+    def start_new_game
+        load_and_select_word_randomly
+        mask_random_word
         validate_player_selection
     end  
 end
