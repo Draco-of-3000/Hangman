@@ -150,6 +150,21 @@ class Hangman
 
         puts "Game saved successfully"
     end
+
+    def load_game
+        saved_data = YAML.load_file('hangman_save.txt')
+
+        @random_word = saved_data[:random_word]
+        @number_of_guesses = saved_data[:number_of_guesses]
+        @display = saved_data[:display]
+        @updated_display = saved_data[:updated_display]
+        wrong_guess_count = saved_data[:wrong_guess_count]
+
+        puts "Game loaded successfully"
+        rescue Errno::ENOENT
+            puts "No saved game found"
+        end
+    end
       
 end
 
