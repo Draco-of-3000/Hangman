@@ -33,7 +33,7 @@ class Hangman
     end
 
     def assign_guess_limit
-        @number_of_guesses = @random_word.length
+        @number_of_guesses = @random_word.length * 2
     end
 
     def player_selection
@@ -50,7 +50,7 @@ class Hangman
             puts "Input a letter"
             player_selection
             if @random_word.include?(@@player_input.last)
-                update_display
+                unmask_word
             else
                 puts "Letter mismatch, keep this up and you will be hanged"
             end
