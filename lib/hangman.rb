@@ -46,6 +46,23 @@ class Hangman
         @@player_input.push(input)
     end
 
+    def query_save_game
+        if @number_of_guesses < 10 && @number_of_guesses >= 1
+          puts "Do you want to save the game? Type 'yes' or 'no'"
+          input = gets.chomp.downcase
+      
+          until input == "yes" || input == "no"
+            puts "Invalid input. Do you want to save the game? Type 'yes' or 'no'"
+            input = gets.chomp.downcase
+          end
+      
+          if input == 'yes'
+            save_game
+          end
+        end
+    end
+      
+
     def validate_player_selection
         num_guesses = @number_of_guesses
         wrong_guess_count = 0
