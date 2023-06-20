@@ -12,6 +12,7 @@ class Hangman
         @display = display
         @updated_display = updated_display
         @game_over = false 
+        @wrong_guesses = []
     end
 
     def load_and_select_word_randomly
@@ -54,6 +55,8 @@ class Hangman
                 unmask_word
             else
                 puts "Letter mismatch, keep this up and you will be hanged"
+                @wrong_guesses.push(@@player_input.last)
+                puts "Wrongly guessed letters: #{@wrong_guesses}"
             end
             @number_of_guesses -= 1
         end
