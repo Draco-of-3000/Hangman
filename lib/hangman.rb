@@ -174,7 +174,6 @@ class Hangman
         saved_data = YAML.load_file('hangman_save.txt')
 
         @random_word = saved_data[:random_word]
-        @number_of_guesses = saved_data[:number_of_guesses]
         @display = saved_data[:display]
         @updated_display = saved_data[:updated_display]
         @wrong_guesses = saved_data[:wrong_guesses]
