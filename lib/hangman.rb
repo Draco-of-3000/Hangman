@@ -1,3 +1,5 @@
+require 'yaml'
+
 puts "Hangman Hangman Hangmaaaanneee"
 
 
@@ -131,6 +133,22 @@ class Hangman
           puts "___|___"
           puts "You failed! You have been hanged by the executioner."
         end
+    end
+
+    def save_game
+        save_data = {
+            random_word: @random_word,
+            number_of_guesses: @number_of_guesses,
+            display: @display,
+            updated_display: @updated_display
+            wrong_guess_count: wrong_guess_count
+        }
+
+        File.open('hangman_save.txt', 'w') do |file|
+            file.puts save_data.to_yaml
+        end
+
+        puts "Game saved successfully"
     end
       
 end
