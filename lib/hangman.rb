@@ -206,7 +206,7 @@ class Hangman
 
         puts "Game loaded successfully"
 
-        start_new_game
+        continue_game
     rescue Errno::ENOENT
         puts "No saved game found"
     end
