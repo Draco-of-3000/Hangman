@@ -48,7 +48,7 @@ class Hangman
     end
 
     def query_save_game
-        if @wrong_guess_count < 10 && @number_of_guesses > 1
+        if @wrong_guess_count < 10 && @wrong_guess_count > 1
           puts "Do you want to save the game? Type 'yes' or 'no'"
           input = gets.chomp.downcase
       
