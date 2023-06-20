@@ -210,11 +210,12 @@ class Hangman
     end
 
     def start_new_game
-        load_and_select_word_randomly
-        mask_random_word
+        if @random_word.nil?
+          load_and_select_word_randomly
+          mask_random_word
+        end
         validate_player_selection
-    end
-      
+    end  
 end
 
 hangman = Hangman.new
