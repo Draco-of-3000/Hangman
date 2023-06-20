@@ -39,7 +39,7 @@ class Hangman
             puts "Invalid input. Do you want to load a saved game? Type 'yes' or 'no'"
             input = gets.chomp.downcase
         end
-        
+
         input
     end
 
@@ -134,7 +134,7 @@ class Hangman
     end
 
     def draw_hangman(guess_count)
-        case wrong_guess_count
+        case guess_count
         when 2
           puts "   ________"
           puts "   |      |"
@@ -208,10 +208,13 @@ class Hangman
     rescue Errno::ENOENT
         puts "No saved game found"
     end
+
+    def start_new_game
+        load_and_select_word_randomly
+        mask_random_word
+        validate_player_selection
+    end
       
 end
 
 hangman = Hangman.new
-hangman.load_and_select_word_randomly
-hangman.mask_random_word
-hangman.validate_player_selection
