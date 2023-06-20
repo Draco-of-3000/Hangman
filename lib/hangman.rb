@@ -5,7 +5,7 @@ puts "Hangman Hangman Hangmaaaanneee"
 
 
 class Hangman
-    attr_accessor :random_word, :number_of_guesses, :display, :updated_display
+    attr_accessor :random_word, :number_of_guesses, :display, :updated_display, :wrong_guesses, :wrong_guess_count
     @@player_input = []
 
     def initialize
@@ -15,6 +15,8 @@ class Hangman
         @updated_display = updated_display
         @game_over = false 
         @wrong_guesses = []
+        @wrong_guess_count = 0
+
     end
 
     def load_and_select_word_randomly
@@ -65,19 +67,20 @@ class Hangman
 
     def validate_player_selection
         num_guesses = @number_of_guesses
-        wrong_guess_count = 0
+        guess_count = 0
 
-        until @number_of_guesses == 0 || @game_over
+        until @wrong_guess_count == 10 || @game_over
             player_selection
+            query_save_game
             if @random_word.include?(@@player_input.last)
                 unmask_word
             else
                 puts "Letter mismatch, keep this up and you will be hanged"
-                wrong_guess_count += 1
+                @wrong_guess_count += 1
+                guess_count += 1
                 display_wrong_guesses
-                draw_hangman(wrong_guess_count)
+                draw_hangman(guess_count)
             end
-            @number_of_guesses -= 1
         end
     end
 
@@ -106,7 +109,7 @@ class Hangman
         @game_over = true
     end
 
-    def draw_hangman(wrong_guess_count)
+    def draw_hangman(guess_count)
         case wrong_guess_count
         when 2
           puts "   ________"
@@ -157,8 +160,9 @@ class Hangman
             random_word: @random_word,
             number_of_guesses: @number_of_guesses,
             display: @display,
-            updated_display: @updated_display
-            wrong_guess_count: wrong_guess_count
+            updated_display: @updated_display,
+            wrong_guesses: @wrong_guesses,
+            wrong_guess_count: @wrong_guess_count
         }
 
         File.open('hangman_save.txt', 'w') do |file|
@@ -175,12 +179,12 @@ class Hangman
         @number_of_guesses = saved_data[:number_of_guesses]
         @display = saved_data[:display]
         @updated_display = saved_data[:updated_display]
-        wrong_guess_count = saved_data[:wrong_guess_count]
+        @wrong_guesses = saved_data[:wrong_guesses]
+        @wrong_guess_count = saved_data[:wrong_guess_count]
 
         puts "Game loaded successfully"
-        rescue Errno::ENOENT
-            puts "No saved game found"
-        end
+    rescue Errno::ENOENT
+        puts "No saved game found"
     end
       
 end
