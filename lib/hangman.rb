@@ -8,7 +8,7 @@ class Hangman
 
     def initialize
         @random_word = random_word
-        @number_of_guesses = number_of_guesses
+        @number_of_guesses = 14
         @display = display
         @updated_display = updated_display
         @game_over = false 
