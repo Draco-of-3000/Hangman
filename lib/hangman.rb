@@ -8,7 +8,7 @@ class Hangman
 
     def initialize
         @random_word = random_word
-        @number_of_guesses = 14
+        @number_of_guesses = 10
         @display = display
         @updated_display = updated_display
         @game_over = false 
@@ -45,14 +45,18 @@ class Hangman
     end
 
     def validate_player_selection
-        num_guesses = 14
+        num_guesses = @number_of_guesses
+        wrong_guess_count = 0
+
         until @number_of_guesses == 0 || @game_over
             player_selection
             if @random_word.include?(@@player_input.last)
                 unmask_word
             else
                 puts "Letter mismatch, keep this up and you will be hanged"
+                wrong_guess_count += 1
                 display_wrong_guesses
+                draw_hangman(wrong_guess_count)
             end
             @number_of_guesses -= 1
         end
@@ -83,41 +87,41 @@ class Hangman
         @game_over = true
     end
 
-    def draw_hangman(num_guesses)
-        case num_guesses
-        when 14, 12
-          puts "   ________"
-          puts "   |      |"
-          puts "   |"
-          puts "   |"
-          puts "   |"
-          puts "   |"
-          puts "___|___"
-        when 10, 8
-          puts "   ________"
-          puts "   |      |"
-          puts "   |      O"
-          puts "   |"
-          puts "   |"
-          puts "   |"
-          puts "___|___"
-        when 6, 4
-          puts "   ________"
-          puts "   |      |"
-          puts "   |      O"
-          puts "   |     /|\\"
-          puts "   |"
-          puts "   |"
-          puts "___|___"
+    def draw_hangman(wrong_guess_count)
+        case wrong_guess_count
         when 2
           puts "   ________"
           puts "   |      |"
+          puts "   |"
+          puts "   |"
+          puts "   |"
+          puts "   |"
+          puts "___|___"
+        when 4
+          puts "   ________"
+          puts "   |      |"
+          puts "   |      O"
+          puts "   |"
+          puts "   |"
+          puts "   |"
+          puts "___|___"
+        when 6
+          puts "   ________"
+          puts "   |      |"
+          puts "   |      O"
+          puts "   |     /|\\"
+          puts "   |"
+          puts "   |"
+          puts "___|___"
+        when 8
+          puts "   ________"
+          puts "   |      |"
           puts "   |      O"
           puts "   |     /|\\"
           puts "   |      |"
           puts "   |"
           puts "___|___"
-        when 0
+        when 10
           puts "   ________"
           puts "   |      |"
           puts "   |      O"
@@ -125,7 +129,7 @@ class Hangman
           puts "   |      |"
           puts "   |     / \\"
           puts "___|___"
-          puts "You lost! The hangman is fully drawn."
+          puts "You failed! You have been hanged by the executioner."
         end
     end
       
@@ -133,6 +137,5 @@ end
 
 hangman = Hangman.new
 hangman.load_and_select_word_randomly
-hangman.assign_guess_limit
 hangman.mask_random_word
 hangman.validate_player_selection
