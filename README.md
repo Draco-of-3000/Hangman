@@ -6,9 +6,7 @@ Welcome to the Hangman game! This is a text-based implementation of the classic 
 
 - Object-Oriented Programming (OOP): This program is built using OOP principles, which enhance code organization, reusability, and maintainability. The game logic is divided into appropriate methods, making it easy to understand and extend.
 
-- Save and Load Game: Players have the option to save the game and load it later to continue playing from where they left off. When saving, the game state (including the hidden word, masked word, wrong guesses, etc.) is serialized into a YAML file (hangman_save.txt). The serialized data is then loaded back into the game to restore the saved state when the player chooses to load the game.
-
-**The game state is saved in a structured format using the YAML format, allowing for easy human-readable representation and deserialization.**
+- Save and Load Game: Players have the option to save the game and load it later to continue playing from where they left off. When saving, the game state (including the hidden word, masked word, wrong guesses, etc.) is serialized into a YAML file (hangman_save.txt). The serialized data is then loaded back into the game to restore the saved state when the player chooses to load the game. The game state is saved in a structured format using the YAML format, allowing for easy human-readable representation and deserialization.
   
 - Randomly selects a word from a dictionary of words with a length between 5 and 12 characters.
 
@@ -17,18 +15,18 @@ Welcome to the Hangman game! This is a text-based implementation of the classic 
 - Allows players to save the game and continue later.
 
 **Requirements**
-To run the Hangman game, you need to have ruby installed on your machine
+- To run the Hangman game, you need to have ruby installed on your machine
 
 **Getting started**
 - Clone the repository to your local machine:
-  $ git clone https://github.com/your-username/hangman.git
+  - $ git clone https://github.com/your-username/hangman.git
 
 - Navigate to the project directory:
-  $ cd hangman
+  - $ cd hangman
 
 - Run the game:
-  $ ruby lib/hangman.rb
- The game will start, and you can begin playing by following the on-screen instructions.
+  - $ ruby lib/hangman.rb
+ - The game will start, and you can begin playing by following the on-screen instructions.
 
 **Usage**
 - The game will prompt you to enter a letter upon start
