@@ -185,7 +185,8 @@ class Hangman
             display: @display,
             updated_display: @updated_display,
             wrong_guesses: @wrong_guesses,
-            wrong_guess_count: @wrong_guess_count
+            wrong_guess_count: @wrong_guess_count,
+            player_input: @@player_input
         }
 
         File.open('hangman_save.txt', 'w') do |file|
@@ -203,6 +204,7 @@ class Hangman
         @updated_display = saved_data[:updated_display]
         @wrong_guesses = saved_data[:wrong_guesses]
         @wrong_guess_count = saved_data[:wrong_guess_count]
+        @@player_input = saved_data[:player_input]
 
         puts "Game loaded successfully"
 
