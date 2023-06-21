@@ -216,7 +216,11 @@ class Hangman
           load_and_select_word_randomly
           mask_random_word
         end
-        unmask_word
+        @display = updated_display.join(" ")
+        puts @display
+
+
+        puts @wrong_guess_count
         display_wrong_guesses
         validate_player_selection
     end 
