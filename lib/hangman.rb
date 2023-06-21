@@ -54,7 +54,6 @@ class Hangman
 
         filtered_words = words.select! { |word| word.length >= 5 && word.length <= 12}
         @random_word = filtered_words.sample
-        puts @random_word
     end
 
     def mask_random_word
